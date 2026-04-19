@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nicolás Cubillos Villamil — Plan de Acción TIC</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --ink: #0e0e0e;
+    --bg: #f4f0e8;
+    --card: #ffffff;
+    --accent1: #e8390e;
+    --accent2: #1a6bff;
+    --accent3: #00b86b;
+    --accent4: #9b30ff;
+    --accent5: #ff9500;
+    --muted: #666;
+    --border: rgba(0,0,0,0.1);
+    --ff-head: 'Syne', sans-serif;
+    --ff-body: 'DM Sans', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--ff-body);
+    background: var(--bg);
+    color: var(--ink);
+    font-size: 16px;
+    line-height: 1.6;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1rem 2rem;
+    background: rgba(244,240,232,0.92);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo { font-family: var(--ff-head); font-weight: 800; font-size: 1rem; letter-spacing: -0.02em; }
+  .nav-links { display: flex; gap: 0.25rem; flex-wrap: wrap; }
+  .nav-links a {
+    font-size: 12px; font-weight: 500; padding: 5px 12px;
+    border-radius: 999px; border: 1px solid var(--border);
+    color: var(--ink); text-decoration: none;
+    transition: all 0.15s;
+  }
+  .nav-links a:hover { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: flex; flex-direction: column; justify-content: flex-end;
+    padding: 8rem 2rem 4rem;
+    position: relative; overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0; z-index: 0;
+    background:
+      radial-gradient(ellipse 60% 50% at 80% 20%, rgba(232,57,14,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 60% at 10% 80%, rgba(26,107,255,0.1) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 50% 50%, rgba(155,48,255,0.06) 0%, transparent 60%);
+  }
+  .hero-tag {
+    display: inline-block; font-size: 11px; font-weight: 500;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    padding: 5px 14px; border: 1px solid var(--border);
+    border-radius: 999px; margin-bottom: 1.5rem;
+    color: var(--muted); position: relative; z-index: 1;
+  }
+  .hero h1 {
+    font-family: var(--ff-head); font-weight: 800;
+    font-size: clamp(3rem, 8vw, 7rem);
+    line-height: 0.95; letter-spacing: -0.03em;
+    position: relative; z-index: 1;
+    margin-bottom: 1.5rem;
+  }
+  .hero h1 .line2 { color: var(--accent1); }
+  .hero-meta {
+    display: flex; gap: 1.5rem; flex-wrap: wrap;
+    position: relative; z-index: 1;
+  }
+  .hero-meta span {
+    font-size: 13px; color: var(--muted);
+    display: flex; align-items: center; gap: 6px;
+  }
+  .hero-meta span::before {
+    content: ''; display: inline-block;
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent1);
+  }
+  .hero-scroll {
+    position: absolute; bottom: 2rem; right: 2rem;
+    font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--muted); writing-mode: vertical-rl;
+    display: flex; align-items: center; gap: 8px; z-index: 1;
+  }
+  .hero-scroll::before {
+    content: ''; display: block; width: 1px; height: 40px;
+    background: var(--muted);
+    animation: scrollline 1.5s ease-in-out infinite;
+  }
+  @keyframes scrollline { 0%,100%{opacity:0.3;transform:scaleY(0.5)} 50%{opacity:1;transform:scaleY(1)} }
+
+  /* SECTIONS */
+  section { padding: 5rem 2rem; max-width: 1100px; margin: 0 auto; }
+  .sec-label {
+    font-size: 11px; font-weight: 500; letter-spacing: 0.15em;
+    text-transform: uppercase; color: var(--muted);
+    margin-bottom: 0.5rem;
+    display: flex; align-items: center; gap: 10px;
+  }
+  .sec-label::before {
+    content: ''; display: inline-block;
+    width: 24px; height: 2px; background: var(--accent1);
+  }
+  .sec-title {
+    font-family: var(--ff-head); font-weight: 800;
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    letter-spacing: -0.02em; line-height: 1.1;
+    margin-bottom: 2.5rem;
+  }
+  .divider {
+    width: 100%; height: 1px; background: var(--border);
+    margin: 0;
+  }
+
+  /* EMPRESA */
+  .empresa-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media(max-width:700px){ .empresa-grid { grid-template-columns: 1fr; } }
+  .card {
+    background: var(--card); border-radius: 16px;
+    border: 1px solid var(--border); padding: 1.5rem;
+  }
+  .card-label {
+    font-size: 11px; font-weight: 500; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted); margin-bottom: 0.75rem;
+  }
+  .card p { font-size: 14px; line-height: 1.6; color: #333; }
+  .kv-list { list-style: none; }
+  .kv-list li {
+    display: flex; justify-content: space-between; align-items: baseline;
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 13px;
+  }
+  .kv-list li:last-child { border-bottom: none; }
+  .kv-list .k { color: var(--muted); }
+  .kv-list .v { font-weight: 500; text-align: right; }
+  .tag-cloud { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 0.5rem; }
+  .tag {
+    font-size: 12px; font-weight: 500; padding: 4px 12px;
+    border-radius: 999px; border: 1px solid var(--border);
+    background: var(--bg);
+  }
+  .card-accent { border-left: 3px solid var(--accent1); }
+
+  /* AUTOCONOCIMIENTO */
+  .auto-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+  @media(max-width:700px){ .auto-grid { grid-template-columns: 1fr; } }
+  .skill-list { list-style: none; }
+  .skill-list li {
+    padding: 8px 0; border-bottom: 1px solid var(--border);
+    font-size: 14px; display: flex; align-items: flex-start; gap: 10px;
+  }
+  .skill-list li:last-child { border-bottom: none; }
+  .skill-list li::before {
+    content: '→'; color: var(--accent2);
+    font-weight: 700; flex-shrink: 0; margin-top: 1px;
+  }
+
+  /* FODA */
+  .foda-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px){ .foda-wrap { grid-template-columns: 1fr; } }
+  .foda-card { border-radius: 16px; padding: 1.5rem; }
+  .foda-card.f { background: #0a3d2e; }
+  .foda-card.o { background: #1a1060; }
+  .foda-card.d { background: #3d0f05; }
+  .foda-card.a { background: #3d2200; }
+  .foda-card.m { background: #1a1a2e; grid-column: 1 / -1; }
+  .foda-head {
+    font-size: 10px; font-weight: 600; letter-spacing: 0.15em;
+    text-transform: uppercase; margin-bottom: 0.5rem;
+    opacity: 0.6; color: #fff;
+  }
+  .foda-title {
+    font-family: var(--ff-head); font-size: 1.1rem; font-weight: 700;
+    color: #fff; margin-bottom: 1rem;
+  }
+  .foda-list { list-style: none; }
+  .foda-list li {
+    font-size: 13px; color: rgba(255,255,255,0.82);
+    padding: 5px 0; border-bottom: 1px solid rgba(255,255,255,0.08);
+    display: flex; gap: 8px;
+  }
+  .foda-list li:last-child { border-bottom: none; }
+  .foda-list li::before { content: '—'; opacity: 0.35; flex-shrink: 0; }
+  .miedo-pairs { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; margin-top: 0.5rem; }
+  @media(max-width:600px){ .miedo-pairs { grid-template-columns: 1fr; } }
+  .miedo-item { background: rgba(255,255,255,0.04); border-radius: 10px; padding: 1rem; }
+  .miedo-q { font-size: 12px; font-style: italic; color: rgba(255,255,255,0.5); margin-bottom: 6px; }
+  .miedo-a { font-size: 13px; color: rgba(255,255,255,0.88); line-height: 1.5; }
+
+  /* CAME */
+  .came-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem; }
+  @media(max-width:600px){ .came-grid { grid-template-columns: 1fr; } }
+  .came-card { background: var(--card); border-radius: 16px; border: 1px solid var(--border); padding: 1.5rem; }
+  .came-letter { font-family: var(--ff-head); font-size: 3rem; font-weight: 800; line-height: 1; margin-bottom: 4px; }
+  .came-word { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); margin-bottom: 1rem; }
+  .came-list { list-style: none; }
+  .came-list li {
+    font-size: 13px; line-height: 1.55; color: #333;
+    padding: 7px 0; border-bottom: 1px solid var(--border);
+  }
+  .came-list li:last-child { border-bottom: none; }
+  .came-list li::before { content: '›'; margin-right: 8px; font-size: 16px; }
+
+  /* EPA */
+  .epa-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 1rem; }
+  @media(max-width:600px){ .epa-grid { grid-template-columns: 1fr; } }
+  .epa-card { background: var(--card); border-radius: 16px; border: 1px solid var(--border); padding: 1.25rem; }
+  .epa-cat { font-size: 10px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; margin-bottom: 0.75rem; }
+  .epa-items { display: flex; flex-direction: column; gap: 6px; }
+  .epa-item { font-size: 13px; color: #333; padding: 6px 10px; background: var(--bg); border-radius: 8px; line-height: 1.4; }
+
+  /* PLAN */
+  .plan-timeline { position: relative; padding-left: 2rem; }
+  .plan-timeline::before {
+    content: ''; position: absolute; left: 8px; top: 8px; bottom: 8px;
+    width: 2px; background: linear-gradient(to bottom, var(--accent1), var(--accent2), var(--accent3));
+    border-radius: 2px;
+  }
+  .tl-block { position: relative; margin-bottom: 2.5rem; }
+  .tl-dot {
+    position: absolute; left: -2rem; top: 6px;
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 3px solid var(--bg); box-shadow: 0 0 0 2px var(--ink);
+  }
+  .tl-block:nth-child(1) .tl-dot { background: var(--accent1); box-shadow: 0 0 0 2px var(--accent1); }
+  .tl-block:nth-child(2) .tl-dot { background: var(--accent2); box-shadow: 0 0 0 2px var(--accent2); }
+  .tl-block:nth-child(3) .tl-dot { background: var(--accent3); box-shadow: 0 0 0 2px var(--accent3); }
+  .tl-period { font-size: 11px; font-weight: 500; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); margin-bottom: 4px; }
+  .tl-title { font-family: var(--ff-head); font-size: 1.2rem; font-weight: 700; margin-bottom: 0.75rem; }
+  .tl-list { list-style: none; }
+  .tl-list li { font-size: 14px; color: #333; padding: 5px 0; border-bottom: 1px solid var(--border); display: flex; gap: 8px; }
+  .tl-list li:last-child { border-bottom: none; }
+  .tl-list li::before { content: '→'; color: var(--muted); flex-shrink: 0; }
+
+  /* FOOTER */
+  footer {
+    text-align: center; padding: 3rem 2rem;
+    border-top: 1px solid var(--border);
+    font-size: 13px; color: var(--muted);
+  }
+  footer strong { font-family: var(--ff-head); font-weight: 700; color: var(--ink); }
+
+  /* ANIMATIONS */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.6s ease, transform 0.6s ease; }
+  .reveal.visible { opacity: 1; transform: none; }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+
+  @media(max-width:480px){
+    nav { padding: 0.75rem 1rem; }
+    .nav-links { display: none; }
+    section { padding: 3.5rem 1.25rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-logo">NCV</div>
+  <div class="nav-links">
+    <a href="#empresa">Empresa</a>
+    <a href="#autoconocimiento">Sobre mí</a>
+    <a href="#foda">FODA</a>
+    <a href="#came">CAME</a>
+    <a href="#epa">EPA</a>
+    <a href="#plan">Plan</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <span class="hero-tag">Plan de acción profesional · Sector TIC · 2025</span>
+  <h1>
+    Nicolás<br>
+    <span class="line2">Cubillos</span><br>
+    Villamil
+  </h1>
+  <div class="hero-meta">
+    <span>Futuro desarrollador web</span>
+    <span>36 años</span>
+    <span>Galicia, España</span>
+    <span>Front-end</span>
+  </div>
+  <div class="hero-scroll">Scroll</div>
+</div>
+
+<div class="divider"></div>
+
+<!-- 01 EMPRESA -->
+<section id="empresa">
+  <div class="reveal">
+    <p class="sec-label">01</p>
+    <h2 class="sec-title">Análisis de empresa:<br>Gradiant</h2>
+  </div>
+  <div class="empresa-grid">
+    <div class="reveal reveal-delay-1">
+      <div class="card">
+        <div class="card-label">Datos básicos</div>
+        <ul class="kv-list">
+          <li><span class="k">Nombre</span><span class="v">Gradiant</span></li>
+          <li><span class="k">Sede</span><span class="v">Vigo, Galicia</span></li>
+          <li><span class="k">Tipo</span><span class="v">Centro I+D+i TIC</span></li>
+          <li><span class="k">Fundación</span><span class="v">2010</span></li>
+          <li><span class="k">Web</span><span class="v" style="color:#1a6bff">gradiant.org</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="card" style="margin-bottom:1rem">
+        <div class="card-label">Tecnologías</div>
+        <div class="tag-cloud">
+          <span class="tag">Python</span><span class="tag">JavaScript</span>
+          <span class="tag">React</span><span class="tag">Node.js</span>
+          <span class="tag">Docker</span><span class="tag">Kubernetes</span>
+          <span class="tag">Machine Learning</span><span class="tag">REST APIs</span>
+          <span class="tag">Ciberseguridad</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1">
+      <div class="card card-accent">
+        <div class="card-label">A qué se dedica</div>
+        <p>Centro tecnológico con sede en Vigo que trabaja en investigación aplicada: ciberseguridad, IA, telecomunicaciones y procesamiento de señales. Desarrollan tecnología para resolver problemas reales en salud, industria y administración pública.</p>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="card card-accent" style="border-left-color: var(--accent2)">
+        <div class="card-label">Por qué me interesa</div>
+        <p>Está en Galicia pero con proyectos de alcance internacional. Al ser un centro mediano, lo que haces se nota. Colaboran con ciclos formativos, lo que me hace pensar que están abiertos a perfiles que vienen de la formación, como es mi caso.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 02 AUTOCONOCIMIENTO -->
+<section id="autoconocimiento">
+  <div class="reveal">
+    <p class="sec-label">02</p>
+    <h2 class="sec-title">Autoconocimiento<br>profesional</h2>
+  </div>
+  <div class="reveal" style="margin-bottom:1.5rem">
+    <div class="card card-accent" style="border-left-color:var(--accent2)">
+      <div class="card-label">Lo que me mueve</div>
+      <p>Me gusta hacer cosas que la gente pueda usar de verdad. Por eso el front-end me atrae más que el back: es lo que el usuario ve, toca y con lo que interactúa. Me importa que las cosas sean fáciles de usar, que se vean bien en móvil y que sean accesibles para cualquier persona.</p>
+    </div>
+  </div>
+  <div class="auto-grid">
+    <div class="reveal reveal-delay-1">
+      <div class="card">
+        <div class="card-label">Tecnologías con las que trabajo</div>
+        <div class="tag-cloud">
+          <span class="tag" style="background:#e8f0ff;border-color:#b3c9ff">HTML5 / CSS3</span>
+          <span class="tag" style="background:#e8f0ff;border-color:#b3c9ff">JavaScript</span>
+          <span class="tag" style="background:#e8f0ff;border-color:#b3c9ff">React</span>
+          <span class="tag" style="background:#e8f0ff;border-color:#b3c9ff">Git / GitHub</span>
+          <span class="tag" style="background:#e8f0ff;border-color:#b3c9ff">Figma</span>
+          <span class="tag" style="background:#f0f0f0;border-color:#ccc">Node.js (explorando)</span>
+        </div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2">
+      <div class="card">
+        <div class="card-label">Lo que sé hacer a día de hoy</div>
+        <ul class="skill-list">
+          <li>Estructurar una página con HTML semántico</li>
+          <li>CSS intermedio: flexbox, variables, responsive</li>
+          <li>JavaScript: fundamentos y manipulación del DOM</li>
+          <li>Git básico: commits, ramas, push y pull</li>
+          <li>Maquetar páginas adaptadas a distintas pantallas</li>
+        </ul>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1" style="grid-column:1/-1">
+      <div class="card">
+        <div class="card-label">Lo que me ayuda más allá del código</div>
+        <ul class="skill-list" style="columns:2;column-gap:2rem">
+          <li>Constancia aunque vaya despacio</li>
+          <li>Entiendo al usuario porque he sido usuario</li>
+          <li>Sé comunicarme bien con personas</li>
+          <li>Me organizo solo, sin necesitar empujones</li>
+          <li>Cuando algo falla, me quedo hasta entender por qué</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 03 FODA -->
+<section id="foda">
+  <div class="reveal">
+    <p class="sec-label">03</p>
+    <h2 class="sec-title">Análisis FODA<br>personal</h2>
+  </div>
+  <div class="foda-wrap reveal">
+    <div class="foda-card f">
+      <div class="foda-head">Fortalezas</div>
+      <div class="foda-title">Lo que me favorece</div>
+      <ul class="foda-list">
+        <li>Tengo madurez que la mayoría de juniors aún no tiene</li>
+        <li>Estoy aquí porque quiero, y eso se nota</li>
+        <li>Aprendo solo, sin que nadie me lleve de la mano</li>
+        <li>Sé trabajar con personas y comunicarme bien</li>
+        <li>Vengo de otro sector y eso da perspectiva diferente</li>
+        <li>Entiendo lo que necesita el usuario porque he sido usuario</li>
+      </ul>
+    </div>
+    <div class="foda-card o">
+      <div class="foda-head">Oportunidades</div>
+      <div class="foda-title">El entorno a mi favor</div>
+      <ul class="foda-list">
+        <li>Alta demanda de desarrolladores web en España</li>
+        <li>El teletrabajo abre puertas que antes no existirían</li>
+        <li>En Galicia está creciendo el ecosistema tecnológico</li>
+        <li>Hay recursos gratuitos de formación muy buenos</li>
+        <li>Comunidades online donde aprender y hacer contactos</li>
+        <li>Apoyo público a la reconversión digital</li>
+      </ul>
+    </div>
+    <div class="foda-card d">
+      <div class="foda-head">Debilidades</div>
+      <div class="foda-title">Lo que debo mejorar</div>
+      <ul class="foda-list">
+        <li>Mis conocimientos técnicos todavía son básicos</li>
+        <li>Casi no tengo portafolio aún, pocas cosas que mostrar</li>
+        <li>No tengo experiencia laboral en el sector TIC</li>
+        <li>Hay herramientas y entornos que me cuestan más</li>
+        <li>El inglés técnico escrito es algo que tengo que mejorar</li>
+      </ul>
+    </div>
+    <div class="foda-card a">
+      <div class="foda-head">Amenazas</div>
+      <div class="foda-title">Riesgos externos</div>
+      <ul class="foda-list">
+        <li>Gente joven con más años de práctica que yo</li>
+        <li>La tecnología cambia rápido, hay que estar encima</li>
+        <li>El mercado junior está bastante saturado en algunas zonas</li>
+        <li>Puede que la edad cuente en contra en algunas selecciones</li>
+        <li>La situación económica del sector no siempre es estable</li>
+      </ul>
+    </div>
+    <div class="foda-card m">
+      <div class="foda-head">Miedos personales</div>
+      <div class="foda-title" style="color:#fff;margin-bottom:0.25rem">Lo que me pesa por dentro</div>
+      <p style="font-size:12px;color:rgba(255,255,255,0.4);font-style:italic;margin-bottom:1rem">Reconocerlos es el primer paso para trabajarlos</p>
+      <div class="miedo-pairs">
+        <div class="miedo-item">
+          <div class="miedo-q">"No seré lo suficientemente bueno cuando termine"</div>
+          <div class="miedo-a">Ningún junior lo es al empezar. Lo que importa es saber aprender, no llegar sabiéndolo todo.</div>
+        </div>
+        <div class="miedo-item">
+          <div class="miedo-q">"Que la edad juegue en mi contra sin que nadie me lo diga"</div>
+          <div class="miedo-a">La madurez y la experiencia vital son activos reales que un chico de 22 aún no tiene.</div>
+        </div>
+        <div class="miedo-item">
+          <div class="miedo-q">"Quedarme obsoleto antes de empezar a trabajar"</div>
+          <div class="miedo-a">El sector premia a quien aprende continuamente, no a quien empezó antes.</div>
+        </div>
+        <div class="miedo-item">
+          <div class="miedo-q">"Haber empezado demasiado tarde"</div>
+          <div class="miedo-a">Los 36 son una buena edad para cambiar. Hay muchos ejemplos de gente que empezó tarde y le fue bien.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 04 CAME -->
+<section id="came">
+  <div class="reveal">
+    <p class="sec-label">04</p>
+    <h2 class="sec-title">Estrategias<br>CAME</h2>
+  </div>
+  <div class="came-grid">
+    <div class="reveal reveal-delay-1 came-card">
+      <div class="came-letter" style="color:var(--accent1)">C</div>
+      <div class="came-word">Corregir debilidades</div>
+      <ul class="came-list">
+        <li>Empezar a construir el portafolio ya, aunque los proyectos sean sencillos. Tres cosas reales en GitHub antes de terminar el ciclo.</li>
+        <li>Hacer algo de inglés técnico. No hace falta hablar perfecto, pero sí poder leer documentación sin perderse.</li>
+        <li>Buscar un proyecto pequeño real donde aplicar lo que aprendo: una web para alguien conocido, algo open source.</li>
+        <li>Cuando aparezca el miedo a no ser suficiente, usarlo como señal para repasar algo concreto, no para pararse.</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2 came-card">
+      <div class="came-letter" style="color:var(--accent5)">A</div>
+      <div class="came-word">Afrontar amenazas</div>
+      <ul class="came-list">
+        <li>La edad no es solo un obstáculo: también es experiencia y fiabilidad. Eso hay que contarlo en las entrevistas, no esconderlo.</li>
+        <li>Elegir una tecnología y profundizar en ella en lugar de ir saltando. Mejor saber algo bien que poco de mucho.</li>
+        <li>Estar al tanto del sector sin obsesionarse. Con una newsletter a la semana ya es suficiente.</li>
+        <li>Buscar empresas que valoren trayectorias distintas, no solo años de experiencia en código.</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-1 came-card">
+      <div class="came-letter" style="color:var(--accent3)">M</div>
+      <div class="came-word">Mantener fortalezas</div>
+      <ul class="came-list">
+        <li>Proteger la rutina de estudio como si fuera una cita importante. La constancia a largo plazo vale más que los atracones.</li>
+        <li>Escribir de vez en cuando sobre lo que voy aprendiendo. Sirve para afianzar y para que se vea el recorrido.</li>
+        <li>No olvidar que ver las cosas desde el punto de vista del usuario es una ventaja real que mucha gente joven no tiene.</li>
+        <li>Mantener contacto con personas en situación parecida. Saber que no eres el único ayuda cuando aparecen las dudas.</li>
+      </ul>
+    </div>
+    <div class="reveal reveal-delay-2 came-card">
+      <div class="came-letter" style="color:var(--accent4)">E</div>
+      <div class="came-word">Explotar oportunidades</div>
+      <ul class="came-list">
+        <li>Acercarme al ecosistema tecnológico de Galicia: meetups y eventos donde la gente es bastante accesible.</li>
+        <li>Intentar hacer las prácticas del ciclo en una empresa que de verdad desarrolle software.</li>
+        <li>El teletrabajo abre puertas a empresas de toda España. No tiene sentido limitarse solo a lo que hay cerca.</li>
+        <li>Participar en algún hackatón o reto aunque no se llegue lejos. Lo que importa es la experiencia y la gente que se conoce.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 05 EPA -->
+<section id="epa">
+  <div class="reveal">
+    <p class="sec-label">05</p>
+    <h2 class="sec-title">Entorno Personal<br>de Aprendizaje</h2>
+  </div>
+  <div class="epa-grid">
+    <div class="reveal reveal-delay-1 epa-card" style="border-top:3px solid var(--accent2)">
+      <div class="epa-cat" style="color:var(--accent2)">Para aprender</div>
+      <div class="epa-items">
+        <div class="epa-item">freeCodeCamp — ejercicios prácticos y gratuitos</div>
+        <div class="epa-item">The Odin Project — currículo completo de cero a empleable</div>
+        <div class="epa-item">MDN Web Docs — la referencia, siempre acabo aquí</div>
+        <div class="epa-item">Udemy — cuando necesito que alguien me explique paso a paso</div>
+        <div class="epa-item">javascript.info — para entender JS de verdad</div>
+        <div class="epa-item">CSS-Tricks — cuando CSS no hace lo que quiero</div>
+        <div class="epa-item">Eloquent JavaScript — el libro que más me está ayudando</div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2 epa-card" style="border-top:3px solid var(--accent3)">
+      <div class="epa-cat" style="color:var(--accent3)">Para estar en contacto</div>
+      <div class="epa-items">
+        <div class="epa-item">LinkedIn — construir perfil y seguir gente del sector</div>
+        <div class="epa-item">Discord — preguntar sin miedo a quedar mal</div>
+        <div class="epa-item">Stack Overflow — para dudas concretas</div>
+        <div class="epa-item">Dev.to — artículos de desarrolladores reales</div>
+        <div class="epa-item">Reddit r/webdev — conversaciones del día a día</div>
+        <div class="epa-item">Meetup.com — eventos cerca de Galicia</div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-1 epa-card" style="border-top:3px solid var(--accent1)">
+      <div class="epa-cat" style="color:var(--accent1)">Para crear y mostrar</div>
+      <div class="epa-items">
+        <div class="epa-item">GitHub — donde vive todo mi código</div>
+        <div class="epa-item">CodePen — para probar ideas rápidas</div>
+        <div class="epa-item">Frontend Mentor — retos con diseños reales</div>
+        <div class="epa-item">Netlify / Vercel — publicar con enlace real</div>
+        <div class="epa-item">Proyectos personales — lo que más me enseña</div>
+      </div>
+    </div>
+    <div class="reveal reveal-delay-2 epa-card" style="border-top:3px solid var(--accent4)">
+      <div class="epa-cat" style="color:var(--accent4)">Para organizarme</div>
+      <div class="epa-items">
+        <div class="epa-item">Notion — notas de estudio y ruta de aprendizaje</div>
+        <div class="epa-item">Trello — tareas de cada proyecto</div>
+        <div class="epa-item">Google Calendar — reservar tiempo de estudio</div>
+        <div class="epa-item">Obsidian — apuntes técnicos siempre a mano</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- 06 PLAN -->
+<section id="plan">
+  <div class="reveal">
+    <p class="sec-label">06</p>
+    <h2 class="sec-title">Plan de acción<br>profesional</h2>
+  </div>
+  <div class="reveal plan-timeline">
+    <div class="tl-block">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Corto plazo · 0–12 meses</div>
+      <div class="tl-title">Sentar las bases y empezar a ser visible</div>
+      <ul class="tl-list">
+        <li>Terminar el ciclo con un buen nivel en HTML, CSS y JavaScript, no solo aprobar</li>
+        <li>Tener un perfil en GitHub y LinkedIn con proyectos reales que se puedan ver</li>
+        <li>Construir al menos tres proyectos de portafolio que funcionen bien en móvil</li>
+        <li>Empezar a aprender React con un proyecto propio, algo que me importe hacer</li>
+        <li>Meterme en al menos una comunidad online y participar, aunque sea poco</li>
+        <li>Conectar con personas del sector en LinkedIn, con naturalidad</li>
+      </ul>
+    </div>
+    <div class="tl-block">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Medio plazo · 1–3 años</div>
+      <div class="tl-title">Entrar al mercado y ganar experiencia real</div>
+      <ul class="tl-list">
+        <li>Conseguir un primer trabajo o unas prácticas como desarrollador junior</li>
+        <li>Especializarme en React y TypeScript como tecnologías principales</li>
+        <li>Contribuir a algún proyecto open source para ver cómo se trabaja en equipo</li>
+        <li>Obtener alguna certificación con peso, como la de Meta Front-End Developer</li>
+        <li>Explorar opciones de teletrabajo para no limitarme a lo que hay cerca</li>
+        <li>Escribir sobre lo que voy aprendiendo para dejar rastro poco a poco</li>
+      </ul>
+    </div>
+    <div class="tl-block">
+      <div class="tl-dot"></div>
+      <div class="tl-period">Largo plazo · 3–5 años</div>
+      <div class="tl-title">Crecer y devolver algo de lo que aprendí</div>
+      <ul class="tl-list">
+        <li>Crecer hacia un perfil mid o senior en desarrollo front-end o full-stack</li>
+        <li>Ayudar a otras personas que estén empezando tarde, como yo lo hice</li>
+        <li>Evaluar si tiene sentido trabajar en una empresa como Gradiant o probar el freelance</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <strong>Nicolás Cubillos Villamil</strong><br>
+  <span>Plan de acción profesional · Sector TIC · Galicia 2025</span>
+</footer>
+
+<script>
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+</body>
+</html>
